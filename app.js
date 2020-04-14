@@ -1,11 +1,13 @@
 const express = require('express'); // import package 
-
 const app = express(); // execute the package
+const mongoose = require('mongoose');
+require('dotenv/config'); // allows access to .env file
 
-// Middlewares 
-app.use('/posts', () => {
-    console.log('This is a middleware running')
-})
+// Import routes
+const postsRoute = require('./routes/posts')
+
+app.use("/posts", postsRoute) // use postsRoute every time we go on /posts
+
 
 // ROUTES - can be created easily using express
 app.get('/', (req,res) => {
@@ -13,9 +15,15 @@ app.get('/', (req,res) => {
     
 });
 
-app.get('/posts', (req,res) => {
-    res.send('We are on Posts')
-});
+// Connect to DB
+mongoose.connect(
+    process.env.DB_CONNECTION,
+    { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true 
+    },
+    () => console.log("connected to DB!") // takes a bit of to print
+)
 
 // to listen to server
 app.listen(3000);
