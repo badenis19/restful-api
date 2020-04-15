@@ -3,7 +3,12 @@ const app = express(); // execute the package
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv/config'); // allows access to .env file
+const cors = require('cors')
 
+
+
+// Middleware
+app.use(cors())
 app.use(bodyParser.json()); // everytime we run any request we makethe bodyparser runs (solved issue with receiving undefined from PostMan post request)
 
 // Import routes
