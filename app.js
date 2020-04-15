@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv/config'); // allows access to .env file
 
-
-
 app.use(bodyParser.json()); // everytime we run any request we makethe bodyparser runs (solved issue with receiving undefined from PostMan post request)
 
 // Import routes
@@ -13,11 +11,9 @@ const postsRoute = require('./routes/posts')
 
 app.use("/posts", postsRoute) // use postsRoute every time we go on /posts
 
-
 // ROUTES - can be created easily using express
 app.get('/', (req,res) => {
     res.send('We are on Home')
-    
 });
 
 // Connect to DB
@@ -31,5 +27,5 @@ mongoose.connect(
 )
 
 // to listen to server
-app.listen(3000);
+app.listen(3001);
 
